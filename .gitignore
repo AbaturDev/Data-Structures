@@ -1,21 +1,28 @@
 ######################
 .DS_Store
-.docx
+*.docx
 
 # VSC
-.code/.vscode/*
-!.code/.vscode/settings.json
-!.code/.vscode/tasks.json
-!.code/.vscode/launch.json
-!.code/.vscode/extensions.json
-!.code/.vscode/*.code-snippets
+Projekt1/code/.vscode
+!Projekt1/code/.vscode/settings.json
+!Projekt1/code/.vscode/tasks.json
+!Projekt1/code/.vscode/launch.json
+!Projekt1/code/.vscode/extensions.json
+!Projekt1/code/.vscode/*.code-snippets
+Projekt2/code/.vscode
+!Projekt2/code/.vscode/settings.json
+!Projekt2/code/.vscode/tasks.json
+!Projekt2/code/.vscode/launch.json
+!Projekt2/code/.vscode/extensions.json
+!Projekt2/code/.vscode/*.code-snippets
 
 # Local History for Visual Studio Code
-.history/
+Projekt1/code/.history/
+Projekt2/code/.history/
 
 # Built Visual Studio Code Extensions
 *.vsix
 
 # Wykonywalny plik
-.code/lista
-
+Projekt1/code/lista
+Projekt2/code/proj
