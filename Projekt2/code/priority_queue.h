@@ -21,13 +21,45 @@ private:
 
 public:
     PriorityQueue();
+    /*
+    * Constructor to set nullptr for front and rear
+    */
+
     ~PriorityQueue();
+    /*
+    * Desctructor to unlock memory used by objects in PriorityQueue - clear queue
+    */
+
     int getSize();
+    /*
+    * Method to get Size of queue
+    * @return size of queue
+    */
+
     void display();
-    T peek();
-    void pop();
-    void push(T value, int priority);
+    /*
+    * Method to display queue
+    */    
+    
+    //T peek();
+    /*
+    *
+    */
+
+    //void pop();
+    /*
+    *
+    */
+
+    //void push(T value, int priority);
+    /*
+    *
+    */
+
     //void change();
+    /*
+    *
+    */
 };
 
 #endif

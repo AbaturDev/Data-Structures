@@ -23,6 +23,7 @@ Projekt2/code/.history/
 # Built Visual Studio Code Extensions
 *.vsix
 
-# Wykonywalny plik
+# Executable files
 Projekt1/code/lista
 Projekt2/code/proj
+*.exe

@@ -12,7 +12,7 @@ int main()
 	srand (time(nullptr));
 
 	LinkedList<int> a;
-	for(int i=0; i<100; i++)
+	for(int i=0; i<100000; i++)
 	{
 		int random = rand() % 101;
 		a.add_begining(random);
