@@ -51,7 +51,7 @@ public:
     *
     */
 
-    //void push(T value, int priority);
+    void push(T data, int prio);
     /*
     *
     */

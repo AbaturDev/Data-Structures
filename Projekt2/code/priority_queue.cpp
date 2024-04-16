@@ -41,3 +41,42 @@ void PriorityQueue<T>::display()
         }
     }
 }
+
+template <class T>
+void PriorityQueue<T>::push(T data, int prio)
+{ 
+    Node<T>* temp = new Node<T>;
+    temp->value = data;
+    temp->priority = prio;
+    
+    if(front == nullptr)
+    {
+        temp->next = front;
+        front = temp;
+        rear = temp;
+        return;
+    }
+
+    if(front->priority < temp->priority)
+    {
+        temp->next = front;
+        front = temp;
+    }
+    else
+    {
+        Node<T>* temp2 = front;
+        while(temp2->next != nullptr && temp2->next->priority > temp->priority) 
+        {
+            temp2 = temp2->next;
+        }
+
+        if(temp2->next == nullptr)
+        {
+            rear = temp;
+            return;
+        }
+
+        temp->next = temp2->next;
+        temp2->next = temp;
+    }
+}

@@ -5,6 +5,8 @@ using namespace std;
 
 int main()
 {
-    cout<<"Hello World"<<endl;
+    PriorityQueue<int> a;
+    a.push(5, 1);
+    a.display();
     return 0;
 }
