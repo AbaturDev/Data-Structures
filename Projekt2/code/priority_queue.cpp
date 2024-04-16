@@ -11,7 +11,7 @@ template <class T>
 int PriorityQueue<T>::getSize()
 {
     int size = 0;
-    Node<T>* temp = rear;
+    Node<T>* temp = front;
     while(temp != nullptr)
     {
         size++;
@@ -23,7 +23,7 @@ int PriorityQueue<T>::getSize()
 template <class T>
 void PriorityQueue<T>::display()
 {
-    Node<T>* temp = rear;
+    Node<T>* temp = front;
     
     cout << "~~~~QUEUE~~~~" << endl;
     
@@ -36,7 +36,7 @@ void PriorityQueue<T>::display()
     {
         while(temp != nullptr)
         {
-            cout << temp->data << " ";
+            cout << temp->value << " ";
             temp =  temp->next;
         }
     }
@@ -48,10 +48,10 @@ void PriorityQueue<T>::push(T data, int prio)
     Node<T>* temp = new Node<T>;
     temp->value = data;
     temp->priority = prio;
-    
-    if(front == nullptr)
+    temp->next = nullptr;
+
+    if(front == nullptr && rear == nullptr)
     {
-        temp->next = front;
         front = temp;
         rear = temp;
         return;
@@ -61,22 +61,43 @@ void PriorityQueue<T>::push(T data, int prio)
     {
         temp->next = front;
         front = temp;
+        return;
     }
-    else
+    
+    if(rear->priority > temp->priority)
     {
-        Node<T>* temp2 = front;
-        while(temp2->next != nullptr && temp2->next->priority > temp->priority) 
-        {
-            temp2 = temp2->next;
-        }
-
-        if(temp2->next == nullptr)
-        {
-            rear = temp;
-            return;
-        }
-
-        temp->next = temp2->next;
-        temp2->next = temp;
+        rear->next = temp;
+        rear = temp;
+        return;
     }
+
+    Node<T> *temp2 = front;
+    while(temp2->next != nullptr && temp2->priority > temp->priority)
+    {
+        temp2 = temp2->next;
+    }
+
+    temp->next = temp2->next;
+    temp2->next = temp;
+}
+
+template <class T>
+PriorityQueue<T>::~PriorityQueue()
+{
+    Node<T>* temp = front;
+    Node<T>* next = nullptr;
+    while(temp != nullptr)
+    {
+        next = temp->next;
+        delete temp;
+        temp = next;
+    }
+    front = nullptr;
+    rear = nullptr;
+}
+
+template <class T>
+T PriorityQueue<T>::peek()
+{
+    return front->value;
 }

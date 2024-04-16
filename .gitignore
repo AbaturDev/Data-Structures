@@ -3,6 +3,7 @@
 *.docx
 
 # VSC
+/.vscode
 Projekt1/code/.vscode
 !Projekt1/code/.vscode/settings.json
 !Projekt1/code/.vscode/tasks.json

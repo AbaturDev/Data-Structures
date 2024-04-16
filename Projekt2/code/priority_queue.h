@@ -27,33 +27,36 @@ public:
 
     ~PriorityQueue();
     /*
-    * Desctructor to unlock memory used by objects in PriorityQueue - clear queue
+    * Desctructor to unlock memory used by objects in PriorityQueue - clear priority queue
     */
 
     int getSize();
     /*
-    * Method to get Size of queue
-    * @return size of queue
+    * Method to get Size of priority queue
+    * @return size of priority queue
     */
 
     void display();
     /*
-    * Method to display queue
+    * Method to display priority queue
     */    
     
-    //T peek();
+    T peek();
     /*
-    *
+    * Method to peek element with highest priority(first element)
+    * return value of element 
     */
 
     //void pop();
     /*
-    *
+    * Method to remove element with higest priority from the queue(first element)
     */
 
     void push(T data, int prio);
     /*
-    *
+    * Method to add new element to the priority queue
+    * @param T data - value of element
+    * @param int prio - priority of element
     */
 
     //void change();
