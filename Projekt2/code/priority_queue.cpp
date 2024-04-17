@@ -65,7 +65,7 @@ void PriorityQueue<T>::push(T data, int prio)
         return;
     }
     
-    if(rear->priority > temp->priority)
+    if(rear->priority >= temp->priority)
     {
         rear->next = temp;
         rear = temp;
@@ -73,7 +73,7 @@ void PriorityQueue<T>::push(T data, int prio)
     }
 
     Node<T> *temp2 = front;
-    while(temp2->next != nullptr && temp2->priority > temp->priority)
+    while(temp2->next != nullptr && temp2->next->priority >= temp->priority)
     {
         temp2 = temp2->next;
     }
@@ -132,12 +132,14 @@ void PriorityQueue<T>::change(T data, int prio)
     }
 
     Node<T>* temp = front;
-    while(temp->next != nullptr && temp->value != data)
+    while(temp != nullptr && temp->value != data)
     {
         temp=temp->next;
     }
 
-    temp->priority = prio;
+    if(temp == nullptr)
+    {
+        return;
+    }
 
-    
 }

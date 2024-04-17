@@ -6,18 +6,12 @@ using namespace std;
 int main()
 {
     PriorityQueue<int> a;
-    for(int i=1; i<11; i++)
-    {
-        a.push(i, i);
-    }
-    a.push(13, 5);
+    a.push(3, 3);
+    a.push(4, 4);
+    a.push(1, 1);
+    a.push(2, 2);
+    a.push(7, 2);
     a.display();
-    cout<<endl<<"Peek: "<<a.peek()<<endl;
-    a.display();
-    cout<<endl;
-    cout<<"POP: "<<a.pop()<<endl;
-    a.display();
-    cout<<endl;
     return 0;
 }
 /*
