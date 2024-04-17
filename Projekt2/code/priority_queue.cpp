@@ -1,4 +1,5 @@
 #include "priority_queue.h"
+#include <stdexcept>
 
 template <class T>
 PriorityQueue<T>::PriorityQueue()
@@ -99,5 +100,44 @@ PriorityQueue<T>::~PriorityQueue()
 template <class T>
 T PriorityQueue<T>::peek()
 {
+    if(getSize()==0)
+    {
+        throw runtime_error("Queue is empty");
+    }
+
     return front->value;
+}
+
+template <class T>
+T PriorityQueue<T>::pop()
+{
+    if(getSize()==0)
+    {
+        throw runtime_error("Queue is empty");
+    }
+
+    Node<T>* temp = front;
+    front = temp->next;
+    T tempVal = temp->value;
+    delete temp;
+    return tempVal;
+}
+
+template <class T>
+void PriorityQueue<T>::change(T data, int prio)
+{
+    if(front==nullptr)
+    {
+        return;
+    }
+
+    Node<T>* temp = front;
+    while(temp->next != nullptr && temp->value != data)
+    {
+        temp=temp->next;
+    }
+
+    temp->priority = prio;
+
+    
 }

@@ -44,12 +44,13 @@ public:
     T peek();
     /*
     * Method to peek element with highest priority(first element)
-    * return value of element 
+    * @return value of element 
     */
 
-    //void pop();
+    T pop();
     /*
     * Method to remove element with higest priority from the queue(first element)
+    * @return element with highest priority
     */
 
     void push(T data, int prio);
@@ -59,9 +60,11 @@ public:
     * @param int prio - priority of element
     */
 
-    //void change();
+    void change(T data, int prio);
     /*
-    *
+    * Method to change priority of chosen element
+    * @param T data - value of element, which priority we want to change
+    * @param int prio - new priority of element
     */
 };
 

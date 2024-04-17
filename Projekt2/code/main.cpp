@@ -12,11 +12,30 @@ int main()
     }
     a.push(13, 5);
     a.display();
-    cout<<endl<<a.peek()<<endl;
+    cout<<endl<<"Peek: "<<a.peek()<<endl;
+    a.display();
+    cout<<endl;
+    cout<<"POP: "<<a.pop()<<endl;
+    a.display();
+    cout<<endl;
     return 0;
 }
 /*
-  a.push(2, 5);
+    PriorityQueue<int> a;
+    for(int i=1; i<11; i++)
+    {
+        a.push(i, i);
+    }
+    a.push(13, 5);
+    a.display();
+    cout<<endl<<"Peek: "<<a.peek()<<endl;
+    a.display();
+    cout<<endl;
+    cout<<"POP: "<<a.pop()<<endl;
+    a.display();
+    cout<<endl;
+
+    a.push(2, 5);
     a.push(8, 6);
     a.push(1, 4);
     a.push(5, 4);
