@@ -132,14 +132,39 @@ void PriorityQueue<T>::change(T data, int prio)
     }
 
     Node<T>* temp = front;
-    while(temp != nullptr && temp->value != data)
+    if(front->value == data)
     {
-        temp=temp->next;
+        front = temp->next;
+        delete temp;
+        push(data, prio);
     }
-
-    if(temp == nullptr)
+    else if(rear->value == data)
     {
-        return;
+        for(int i=0; i<getSize()-2; i++)
+        {
+            temp=temp->next;
+        }
+        Node<T>* temp2 = temp->next;
+        temp->next = temp2->next;
+        rear = temp;
+        temp->next = nullptr;
+        //temp2->next = nullptr;
+        delete temp2;
+        push(data, prio);
     }
-
+    else
+    {
+        while(temp != nullptr && temp->value != data)
+        {
+            temp=temp->next;
+        }
+        if(temp == nullptr)
+        {
+            return;
+        }
+        Node<T>* temp2 = temp->next;
+        temp->next = temp2->next;
+        delete temp2;   
+        push(data, prio);
+    }
 }
