@@ -1,31 +1,24 @@
 #include <iostream>
 #include "priority_queue.h"
 #include "priority_queue.cpp"
+#include <chrono>
+using namespace chrono;
 using namespace std;
 
 int main()
 {
     PriorityQueue<int> a;
-    for(int i=1; i<6; i++)
+    int test = 1000000;
+    for(int i = 1; i < test+1; i++)
     {
         a.push(i,i);
     }
-    a.display();
-    //cout<<endl<<"TEST nth"<<endl;
-    //a.change(4,6);
-    //a.display();
+
+    auto start = high_resolution_clock::now();
+    a.pop();
+    auto stop = high_resolution_clock::now();
+	auto duration = duration_cast<nanoseconds>(stop - start);
+	cout << duration.count()<<endl;
 
     return 0;
 }
-
-/*  
-    Dziala
-    cout<<endl<<"TEST front"<<endl;
-    a.change(5,3);
-    a.display();
-
-    Dziala
-    cout<<endl<<"TEST rear"<<endl;
-    a.change(1,0);
-    a.display();
-*/

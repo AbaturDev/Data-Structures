@@ -18,7 +18,7 @@ class PriorityQueue
 private:
     Node<T>* front;           //head
     Node<T>* rear;            //tail
-
+    int size;
 public:
     PriorityQueue();
     /*

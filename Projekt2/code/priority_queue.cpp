@@ -6,18 +6,12 @@ PriorityQueue<T>::PriorityQueue()
 {
     front = nullptr;
     rear = nullptr;
+    size = 0;
 }
 
 template <class T>
 int PriorityQueue<T>::getSize()
 {
-    int size = 0;
-    Node<T>* temp = front;
-    while(temp != nullptr)
-    {
-        size++;
-        temp = temp->next;
-    }
     return size;
 }
 
@@ -40,6 +34,7 @@ void PriorityQueue<T>::display()
             cout << temp->value << " ";
             temp =  temp->next;
         }
+        cout<<endl;
     }
 }
 
@@ -55,6 +50,7 @@ void PriorityQueue<T>::push(T data, int prio)
     {
         front = temp;
         rear = temp;
+        size++;
         return;
     }
 
@@ -62,6 +58,7 @@ void PriorityQueue<T>::push(T data, int prio)
     {
         temp->next = front;
         front = temp;
+        size++;
         return;
     }
     
@@ -69,6 +66,7 @@ void PriorityQueue<T>::push(T data, int prio)
     {
         rear->next = temp;
         rear = temp;
+        size++;
         return;
     }
 
@@ -80,6 +78,7 @@ void PriorityQueue<T>::push(T data, int prio)
 
     temp->next = temp2->next;
     temp2->next = temp;
+    size++;
 }
 
 template <class T>
@@ -100,7 +99,7 @@ PriorityQueue<T>::~PriorityQueue()
 template <class T>
 T PriorityQueue<T>::peek()
 {
-    if(getSize()==0)
+    if(front == nullptr)
     {
         throw runtime_error("Queue is empty");
     }
@@ -111,7 +110,7 @@ T PriorityQueue<T>::peek()
 template <class T>
 T PriorityQueue<T>::pop()
 {
-    if(getSize()==0)
+    if(front == nullptr)
     {
         throw runtime_error("Queue is empty");
     }
@@ -148,19 +147,26 @@ void PriorityQueue<T>::change(T data, int prio)
         temp->next = temp2->next;
         rear = temp;
         temp->next = nullptr;
-        //temp2->next = nullptr;
         delete temp2;
         push(data, prio);
     }
     else
     {
+        int position = 1;
         while(temp != nullptr && temp->value != data)
         {
             temp=temp->next;
+            position++;
         }
         if(temp == nullptr)
         {
             return;
+        }
+        
+        temp=front;
+        for(int i=0; i<position-2; i++)
+        {
+            temp=temp->next;
         }
         Node<T>* temp2 = temp->next;
         temp->next = temp2->next;
