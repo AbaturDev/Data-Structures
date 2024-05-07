@@ -1,8 +1,7 @@
 ﻿#include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "lista.h"
-#include "lista.cpp"
+#include "list.h"
 #include <chrono>
 using namespace chrono;
 using namespace std;
@@ -12,7 +11,7 @@ int main()
 	srand (time(nullptr));
 
 	LinkedList<int> a;
-	for(int i=0; i<100000; i++)
+	for(int i=0; i<1000000; i++)
 	{
 		int random = rand() % 101;
 		a.add_begining(random);

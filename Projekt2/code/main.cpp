@@ -1,6 +1,5 @@
 #include <iostream>
 #include "priority_queue.h"
-#include "priority_queue.cpp"
 #include <chrono>
 using namespace chrono;
 using namespace std;
