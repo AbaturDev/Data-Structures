@@ -47,10 +47,7 @@ Separate<K,V>::Separate(int size, int capacity)
 template<typename K, typename V>
 int Separate<K,V>::hash(K key)
 {
-    double A = 0.6180339887;
-    double value = key * A;
-    value -= floor(value);
-    return value*capacity;
+    return key % capacity;
 }
 
 template<typename K, typename V>

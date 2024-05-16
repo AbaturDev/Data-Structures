@@ -1,24 +1,35 @@
 #include <iostream>
-#include "open_addr.h"
-#include <chrono>
-using namespace chrono;
+#include "timer.h"
 using namespace std;
 
 int main()
 {
-    Separate<int, int> a;
+    HashTable<int, int>* a;
+    Separate<int, int> b;
+    Open<int, int> c;
+
+    a = &b;
 
     for(int i=0; i<1000000; i++)
     {
-        a.insert(i,i);
+        a->insert(i,i);
     }
-    auto start = high_resolution_clock::now();
-    a.find(100000);
-    auto stop = high_resolution_clock::now();
-	auto duration = duration_cast<nanoseconds>(stop - start);
-	cout << duration.count()<<endl;
-    //a.display();
-    //cout<<a.find(2)<<endl;
+
+    Timer<int, int> timer;
+
+    timer.find_time(*a, 10000);
+    timer.insert_time(*a,12334,51235);
+    timer.getSize_time(*a);
+    
+    a = &c;
+    for(int i=0; i<1000000; i++)
+    {
+        a->insert(i,i);
+    }
+
+    timer.find_time(*a, 10000);
+    timer.insert_time(*a,12334,51235);
+    timer.getSize_time(*a);
 
     return 0;
 }
