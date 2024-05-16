@@ -1,18 +1,24 @@
 #include <iostream>
-#include "separate.h"
+#include "open_addr.h"
+#include <chrono>
+using namespace chrono;
 using namespace std;
 
 int main()
 {
     Separate<int, int> a;
-    for(int i=0; i<10; i++)
+
+    for(int i=0; i<1000000; i++)
     {
         a.insert(i,i);
     }
-    a.insert(9,10);
-    a.insert(9,11);
-    a.insert(5,6);
+    auto start = high_resolution_clock::now();
+    a.find(100000);
+    auto stop = high_resolution_clock::now();
+	auto duration = duration_cast<nanoseconds>(stop - start);
+	cout << duration.count()<<endl;
+    //a.display();
+    //cout<<a.find(2)<<endl;
 
-    a.display();
     return 0;
 }

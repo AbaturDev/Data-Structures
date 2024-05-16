@@ -1,4 +1,5 @@
 #include "hash_table.h"
+#include <cmath>
 
 template<typename K, typename V>
 struct Node
@@ -46,7 +47,10 @@ Separate<K,V>::Separate(int size, int capacity)
 template<typename K, typename V>
 int Separate<K,V>::hash(K key)
 {
-    return key % capacity;
+    double A = 0.6180339887;
+    double value = key * A;
+    value -= floor(value);
+    return value*capacity;
 }
 
 template<typename K, typename V>
@@ -88,7 +92,7 @@ template<typename K, typename V>
 void Separate<K,V>::insert(K key, V value)
 {
     size++;
-    if(size==capacity)
+    if(size == capacity)  //loadFactor == 1
     {
         rehashing();
     }
@@ -143,6 +147,6 @@ V Separate<K,V>::find(K key)
         }
         temp = temp->next;
     }
-    cout<<"Data not found! Returing defult value"<<endl;
+    cout<<"Data not found! Returning defult value"<<endl;
     return V();
 }
