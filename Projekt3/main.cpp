@@ -5,11 +5,13 @@ using namespace std;
 int main()
 {
     Separate<int, int> a;
-    a.insert(10,5);
-    a.insert(2,7);
-    a.insert(3,8);
-    cout<<a.getSize()<<endl;
-    cout<<a.find(4)<<endl;
+    for(int i=0; i<10; i++)
+    {
+        a.insert(i,i);
+    }
+    a.insert(9,10);
+    a.insert(9,11);
+    a.insert(5,6);
 
     a.display();
     return 0;

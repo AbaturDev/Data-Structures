@@ -24,7 +24,7 @@ private:
     V find(K key);
 
     private:
-    void rehashing();         //resize
+    void rehashing();
     int hash(K key);
 };
 
@@ -36,6 +36,11 @@ Separate<K,V>::Separate(int size, int capacity)
     this->capacity = capacity;
     this->size = size;
     array = new Node<K,V>*[capacity];
+
+    for(int i = 0; i<capacity; i++)
+    {
+        array[i]=nullptr;
+    }
 }
 
 template<typename K, typename V>
@@ -50,14 +55,14 @@ void Separate<K,V>::rehashing()
     capacity = capacity * 2;
     Node<K,V>** temp = new Node<K,V>*[capacity];
 
-    for(int i = 0; i < capacity; i++)
+    for(int i = 0; i< capacity; i++)
     {
-        temp[i]=array[i];
+        temp[i]=nullptr;
     }
     
     for(int i = 0; i < size; i++)
     {
-        Node<K,V> *ptr = temp[i];
+        Node<K,V> *ptr = array[i];
         while(ptr != nullptr)
         {
             int index = hash(ptr->key);
@@ -68,9 +73,8 @@ void Separate<K,V>::rehashing()
             }
             else
             {
-                Node<K,V> *next = temp[index]->next;
-                temp[index]->next = ptr;
-                ptr->next = next;
+                ptr->next = temp[index];
+                temp[index] = ptr;
             }
             ptr = ptr->next;
         }
@@ -83,12 +87,12 @@ void Separate<K,V>::rehashing()
 template<typename K, typename V>
 void Separate<K,V>::insert(K key, V value)
 {
+    size++;
     if(size==capacity)
     {
         rehashing();
     }
 
-    size++;
     int index = hash(key);
     Node<K,V>* temp = new Node<K,V>;
     temp->key = key;
@@ -101,9 +105,8 @@ void Separate<K,V>::insert(K key, V value)
     }
     else
     {
-        Node<K,V> *next = array[index]->next;
-        array[index]->next = temp;
-        temp->next = next;
+        temp->next = array[index];
+        array[index] = temp;
     }
 }
 
