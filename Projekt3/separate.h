@@ -1,3 +1,5 @@
+#ifndef SEPARATE_H
+#define SEPARATE_H
 #include "hash_table.h"
 #include <cmath>
 
@@ -147,3 +149,5 @@ V Separate<K,V>::find(K key)
     cout<<"Data not found! Returning defult value"<<endl;
     return V();
 }
+
+#endif

@@ -4,7 +4,17 @@ using namespace std;
 
 int main()
 {
-    HashTable<int, int>* a;
+    Cuckoo<int, int> x;
+
+    x.insert(1,1);
+    x.insert(1,2);
+    x.insert(3,3);
+    x.insert(4,4);
+    cout<<x.getSize()<<endl;
+    cout<<x.find(0)<<endl;
+    x.display();
+
+    /*HashTable<int, int>* a;
     Separate<int, int> b;
     Open<int, int> c;
 
@@ -30,6 +40,6 @@ int main()
     timer.find_time(*a, 10000);
     timer.insert_time(*a,12334,51235);
     timer.getSize_time(*a);
-
+    */
     return 0;
 }

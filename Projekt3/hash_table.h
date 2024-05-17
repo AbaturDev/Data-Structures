@@ -1,3 +1,6 @@
+#ifndef HASH_TABLE_H
+#define HASH_TABLE_H
+
 #include <iostream>
 using namespace std;
 
@@ -10,3 +13,5 @@ public:
     virtual int getSize() = 0;
     virtual V find(K key) = 0; 
 };
+
+#endif

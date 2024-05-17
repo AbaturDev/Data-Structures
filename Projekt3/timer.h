@@ -1,4 +1,6 @@
-#include "open_addr.h"
+#ifndef TIMER_H
+#define TIMER_H
+#include "cuckoo.h"
 #include <chrono>
 using namespace chrono;
 
@@ -42,3 +44,5 @@ void Timer<K,V>::getSize_time(HashTable<K,V>& a)
 	auto duration = duration_cast<nanoseconds>(stop - start);
 	cout << duration.count()<<endl;
 }
+
+#endif

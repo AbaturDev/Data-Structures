@@ -1,3 +1,5 @@
+#ifndef OPEN_ADDR_H
+#define OPEN_ADDR_H
 #include "separate.h"
 #include <cmath>
 
@@ -156,3 +158,5 @@ V Open<K,V>::find(K key)
     cout<<"Data not found! Returning defult value"<<endl;
     return V();
 }
+
+#endif
