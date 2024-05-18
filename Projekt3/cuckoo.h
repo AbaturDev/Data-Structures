@@ -21,6 +21,7 @@ private:
 
 public:
     Cuckoo(int size = 0, int capacity = 5);
+    ~Cuckoo();
     void insert(K key, V value);
     V find(K key);
     void display();
@@ -200,6 +201,18 @@ V Cuckoo<K,V>::find(K key)
     cout<<"Data not found! Returning defulat value"<<endl;
     return V();
 
+}
+
+template<typename K, typename V>
+Cuckoo<K,V>::~Cuckoo()
+{
+    for(int i = 0; i < capacity; i++)
+    {
+        delete array1[i];
+        delete array2[i];
+    }
+    delete [] array1;
+    delete [] array2;
 }
 
 #endif

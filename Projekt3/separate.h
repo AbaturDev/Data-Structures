@@ -21,6 +21,7 @@ private:
 
     public:
     Separate(int size = 0, int capacity = 5);
+    ~Separate();
     void display();
     void insert(K key, V value);
     int getSize();
@@ -148,6 +149,25 @@ V Separate<K,V>::find(K key)
     }
     cout<<"Data not found! Returning defult value"<<endl;
     return V();
+}
+
+template<typename K, typename V>
+Separate<K,V>::~Separate()
+{
+    Node<K,V>* temp =  new Node<K,V>;
+    Node<K,V>* next = nullptr;
+    for(int i = 0; i<capacity; i++)
+    {
+        temp = array[i];
+        while(temp != nullptr)
+        {
+            next = temp->next;
+            delete temp;
+            temp = next;
+        }
+        delete array[i];
+    }
+    delete [] array;
 }
 
 #endif

@@ -20,6 +20,7 @@ private:
 
 public:
     Open(int size = 0, int capacity = 5);
+    ~Open();
     void display();
     void insert(K key, V value);
     V find(K key);
@@ -157,6 +158,16 @@ V Open<K,V>::find(K key)
     }
     cout<<"Data not found! Returning defult value"<<endl;
     return V();
+}
+
+template<typename K, typename V>
+Open<K,V>::~Open()
+{
+    for(int i = 0; i < capacity; i++)
+    {
+        delete array[i];
+    }
+    delete [] array;
 }
 
 #endif

@@ -9,13 +9,13 @@ int main()
     Open<int, int> c;
     Cuckoo<int, int> x;
 
-    a = &x;
+    a = &c;
 
-    for(int i=0; i<13; i++)
+    for(int i=0; i<1000000; i++)
     {
         a->insert(i,i);
     }
-    a->display();
+    //a->display();
     Timer<int, int> timer;
 
     timer.find_time(*a, 10000);
