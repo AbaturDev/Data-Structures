@@ -69,18 +69,11 @@ void Separate<K,V>::rehashing()
         Node<K,V> *ptr = array[i];
         while(ptr != nullptr)
         {
+            Node<K,V>* next = ptr->next;
             int index = hash(ptr->key);
-            if(temp[index] == nullptr)
-            {
-                temp[index] = ptr;
-                temp[index]->next = nullptr;
-            }
-            else
-            {
-                ptr->next = temp[index];
-                temp[index] = ptr;
-            }
-            ptr = ptr->next;
+            ptr->next = temp[index];
+            temp[index] = ptr;
+            ptr = next;
         }
     }
 
@@ -91,8 +84,8 @@ void Separate<K,V>::rehashing()
 template<typename K, typename V>
 void Separate<K,V>::insert(K key, V value)
 {
-    size++;
-    if(size == capacity)  //loadFactor == 1
+    float loadFactor = size/capacity;
+    if(loadFactor >= 1)  //loadFactor >= 1
     {
         rehashing();
     }
@@ -109,9 +102,16 @@ void Separate<K,V>::insert(K key, V value)
     }
     else
     {
-        temp->next = array[index];
-        array[index] = temp;
+        Node<K,V>* ptr = array[index];
+        while(ptr->next != nullptr)
+        {
+            ptr = ptr->next;
+        }
+        ptr->next = temp;
     }
+    size++;
+    //temp->next = array[index];
+    //array[index] = temp;
 }
 
 template<typename K, typename V>
@@ -165,7 +165,6 @@ Separate<K,V>::~Separate()
             delete temp;
             temp = next;
         }
-        delete array[i];
     }
     delete [] array;
 }
