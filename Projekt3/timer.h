@@ -9,7 +9,7 @@ class Timer
 {
 public:
     void insert_time(HashTable<K,V>& a, K key, V value);
-    void find_time(HashTable<K,V>& a, K key);
+    void find_time(HashTable<K,V>& a, K key, V value);
     void getSize_time(HashTable<K,V>& a);
 };
 
@@ -26,10 +26,10 @@ void Timer<K,V>::insert_time(HashTable<K,V>& a, K key, V value)
 }
 
 template<typename K, typename V>
-void Timer<K,V>::find_time(HashTable<K,V>& a, K key)
+void Timer<K,V>::find_time(HashTable<K,V>& a, K key, V value)
 {
     auto start = high_resolution_clock::now();
-    a.find(key);
+    a.find(key, value);
     auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<nanoseconds>(stop - start);
 	cout << duration.count()<<endl;

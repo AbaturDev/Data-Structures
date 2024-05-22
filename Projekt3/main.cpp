@@ -10,19 +10,20 @@ int main()
     Cuckoo<int, int> x;
     Timer<int, int> timer;
 
-    a = &b;
+    a = &c;
 
-    int count = 10;
+    int count = 10000;
 
     for(int i=0; i<count; i++)
     {
         a->insert(1,i);
     }
+
     //a->display();
-    //cout<<a->getSize()<<endl;
-    timer.find_time(*a, 2);
+
+    timer.find_time(*a, 1,count-1);
     //timer.insert_time(*a,count,51235);
-    //timer.getSize_time(*a);
+    timer.getSize_time(*a);
     
     return 0;
 }

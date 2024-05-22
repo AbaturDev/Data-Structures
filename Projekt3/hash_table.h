@@ -11,7 +11,7 @@ public:
     virtual void display() = 0;
     virtual void insert(K key, V value) = 0;
     virtual int getSize() = 0;
-    virtual V find(K key) = 0; 
+    virtual bool find(K key, V value) = 0; 
 };
 
 #endif

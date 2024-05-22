@@ -25,7 +25,7 @@ private:
     void display();
     void insert(K key, V value);
     int getSize();
-    V find(K key);
+    bool find(K key, V value);
 
     private:
     void rehashing();
@@ -135,20 +135,20 @@ int Separate<K,V>::getSize()
 }
 
 template<typename K, typename V>
-V Separate<K,V>::find(K key)
+bool Separate<K,V>::find(K key, V value)
 {
     int index = hash(key);
     Node<K,V> *temp = array[index];
     while(temp != nullptr)
     {
-        if(temp->key == key)
+        if(temp->key == key && temp->value == value)
         {
-            return temp->value;
+            return true;
         }
         temp = temp->next;
     }
     cout<<"Data not found! Returning defult value"<<endl;
-    return V();
+    return false;
 }
 
 template<typename K, typename V>

@@ -23,7 +23,7 @@ public:
     ~Open();
     void display();
     void insert(K key, V value);
-    V find(K key);
+    bool find(K key, V value);
     int getSize();
 
 private:
@@ -138,7 +138,7 @@ void Open<K,V>::display()
 }
 
 template<typename K, typename V>
-V Open<K,V>::find(K key)
+bool Open<K,V>::find(K key, V value)
 {
     int index = hash(key);
     int count = 0;
@@ -147,18 +147,18 @@ V Open<K,V>::find(K key)
         if(count>capacity)
         {
             cout<<"Data not found! Returning defult value"<<endl;
-            return V();
+            return false;
         }
-        if(array[index]->key == key)
+        if(array[index]->key == key && array[index]->value == value)
         {
-            return array[index]->value;
+            return true;
         }
         index++;
         index %= capacity;
         count++;
     }
     cout<<"Data not found! Returning defult value"<<endl;
-    return V();
+    return false;
 }
 
 template<typename K, typename V>

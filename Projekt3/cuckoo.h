@@ -16,28 +16,32 @@ class Cuckoo : public HashTable<K,V>
 private:
     int size;
     int capacity;
+    int cycle;
     CNode<K,V>** array1;
     CNode<K,V>** array2;
 
 public:
-    Cuckoo(int size = 0, int capacity = 5);
+    Cuckoo(int size = 0, int capacity = 5, int cycle = 0);
     ~Cuckoo();
     void insert(K key, V value);
-    V find(K key);
+    bool find(K key, V value);
     void display();
     int getSize();
 
 private:
+    void hash();
     int hash1(K key);
     int hash2(K key);
+    int hash3(K key);
     void rehashing();
 };
 
 //~~~~~~~~~CODE IMPLEMENTATION~~~~~~~~~
 
 template<typename K, typename V>
-Cuckoo<K,V>::Cuckoo(int size, int capacity)
+Cuckoo<K,V>::Cuckoo(int size, int capacity, int cycle)
 {
+    this->cycle = cycle;
     this->capacity = capacity;
     this->size = size;
     array1 = new CNode<K,V>*[capacity];
@@ -66,16 +70,19 @@ int Cuckoo<K,V>::hash2(K key)
 }
 
 template<typename K, typename V>
+int Cuckoo<K,V>::hash3(K key)
+{
+    double B = 0.5176380902;
+    double value = key * B;
+    value -= floor(value);
+    return value * capacity;
+}
+
+template<typename K, typename V>
 void Cuckoo<K,V>::insert(K key, V value)
 {
     int test1 = hash1(key);
     int test2 = hash2(key);
-
-    if((array1[test1] != nullptr && array1[test1]->key == key) || (array2[test2] != nullptr && array2[test2]->key == key))
-    {
-        //key already exist
-        return;
-    }
 
     float loadFactor = size/capacity;
     if(loadFactor > 0.5)
@@ -115,6 +122,7 @@ void Cuckoo<K,V>::insert(K key, V value)
                     return;
                 }
             }
+            cycle++;
             rehashing();
             insert(key, value);
         }
@@ -124,6 +132,7 @@ void Cuckoo<K,V>::insert(K key, V value)
 template<typename K, typename V>
 void Cuckoo<K,V>::rehashing()
 {
+    void hash();
     int oldCap = capacity;
     capacity = capacity*2;
     CNode<K,V>** temp_arr1 = array1;
@@ -184,22 +193,29 @@ int Cuckoo<K,V>::getSize()
 }
 
 template<typename K, typename V>
-V Cuckoo<K,V>::find(K key)
+bool Cuckoo<K,V>::find(K key, V value)
 {
     int index = hash1(key);
-    if(array1[index] != nullptr && array1[index]->key == key)
+    if(array1[index] != nullptr && array1[index]->key == key && array1[index]->value == value)
     {
-        return array1[index]->value;
+        return true;
     }
 
     index = hash2(key);
-    if(array2[index] != nullptr && array2[index]->key == key)
+    if(array2[index] != nullptr && array2[index]->key == key && array2[index]->value == value)
     {
-        return array2[index]->value;
+        return true;
     }
 
     cout<<"Data not found! Returning defulat value"<<endl;
-    return V();
+    return false;
+
+}
+
+template<typename K, typename V>
+void Cuckoo<K,V>::hash()
+{
+    if(cycle)
 
 }
 
