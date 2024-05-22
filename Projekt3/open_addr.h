@@ -155,6 +155,7 @@ V Open<K,V>::find(K key)
         }
         index++;
         index %= capacity;
+        count++;
     }
     cout<<"Data not found! Returning defult value"<<endl;
     return V();
