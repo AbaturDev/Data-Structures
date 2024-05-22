@@ -29,7 +29,8 @@ public:
     int getSize();
 
 private:
-    void hash();
+    int current_hash1(K key);
+    int current_hash2(K key);
     int hash1(K key);
     int hash2(K key);
     int hash3(K key);
@@ -81,9 +82,6 @@ int Cuckoo<K,V>::hash3(K key)
 template<typename K, typename V>
 void Cuckoo<K,V>::insert(K key, V value)
 {
-    int test1 = hash1(key);
-    int test2 = hash2(key);
-
     float loadFactor = size/capacity;
     if(loadFactor > 0.5)
     {
@@ -93,7 +91,7 @@ void Cuckoo<K,V>::insert(K key, V value)
     CNode<K,V>* newNode = new CNode<K,V>;
     newNode->key = key;
     newNode->value = value;
-    int index = hash1(key);
+    int index = current_hash1(key);
     if(array1[index] == nullptr)
     {
         array1[index] = newNode;
@@ -101,7 +99,7 @@ void Cuckoo<K,V>::insert(K key, V value)
     }
     else
     {     
-        int newindex = hash2(array1[index]->key);
+        int newindex = current_hash2(array1[index]->key);
         if(array2[newindex] == nullptr)
         {
             array2[newindex] = array1[index];
@@ -112,7 +110,7 @@ void Cuckoo<K,V>::insert(K key, V value)
         {
             for(int tries=0; tries<4; tries++) //max tries
             {
-                int index3 = hash1(array2[newindex]->key);
+                int index3 = current_hash1(array2[newindex]->key);
                 if(array1[index] == nullptr)
                 {
                     array1[index3] = array2[newindex];
@@ -122,7 +120,6 @@ void Cuckoo<K,V>::insert(K key, V value)
                     return;
                 }
             }
-            cycle++;
             rehashing();
             insert(key, value);
         }
@@ -132,7 +129,7 @@ void Cuckoo<K,V>::insert(K key, V value)
 template<typename K, typename V>
 void Cuckoo<K,V>::rehashing()
 {
-    void hash();
+    cycle++;
     int oldCap = capacity;
     capacity = capacity*2;
     CNode<K,V>** temp_arr1 = array1;
@@ -195,13 +192,13 @@ int Cuckoo<K,V>::getSize()
 template<typename K, typename V>
 bool Cuckoo<K,V>::find(K key, V value)
 {
-    int index = hash1(key);
+    int index = current_hash1(key);
     if(array1[index] != nullptr && array1[index]->key == key && array1[index]->value == value)
     {
         return true;
     }
 
-    index = hash2(key);
+    index = current_hash2(key);
     if(array2[index] != nullptr && array2[index]->key == key && array2[index]->value == value)
     {
         return true;
@@ -209,14 +206,30 @@ bool Cuckoo<K,V>::find(K key, V value)
 
     cout<<"Data not found! Returning defulat value"<<endl;
     return false;
-
 }
 
 template<typename K, typename V>
-void Cuckoo<K,V>::hash()
+int Cuckoo<K,V>::current_hash1(K key)
 {
-    if(cycle)
+    switch(cycle % 3)
+    {
+        case 0: return hash1(key);
+        case 1: return hash2(key);
+        case 2: return hash3(key);
+        default: return hash1(key);
+    }
+}
 
+template<typename K, typename V>
+int Cuckoo<K,V>::current_hash2(K key)
+{
+    switch(cycle % 3)
+    {
+        case 0: return hash2(key);
+        case 1: return hash3(key);
+        case 2: return hash1(key);
+        default: return hash2(key);
+    }
 }
 
 template<typename K, typename V>
