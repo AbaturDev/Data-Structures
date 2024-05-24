@@ -10,22 +10,18 @@ int main()
     Cuckoo<int, int> x;
     Timer<int, int> timer;
 
-    a = &x;
+    a = &c;
 
     int count = 1000000;
 
     for(int i=0; i<count; i++)
     {
-        a->insert(i,i);
-        //a->insert(i,i+1);
+        a->insert(1,i);
     }
-    cout<<a->getSize()<<endl;
 
-    timer.find_time(*a, count-1,count-1);
-    timer.insert_time(*a,count,count);
-    timer.getSize_time(*a);
-
-    //a->display();
+    //timer.insert_time(*a,1,count);
+    timer.find_time(*a, 1,count-1);
+    //timer.getSize_time(*a);
     
     return 0;
 }
