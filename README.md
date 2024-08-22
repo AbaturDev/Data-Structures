@@ -1,18 +1,19 @@
-# Struktury Danych - Projekt
+# Data Structures - University Project
 
-## Projekt 1 - Lista wiązana, a tablica dynamiczna
+## Project 1 - Linked List vs Dynamic Array
 
-Implementacja listy wiązanej w C++.
+In this project, I implemented my own linked list and tested basic methods such as searching, inserting, and removing elements. 
+The linked list was implemented in C++.
 
-## Projekt 2 - Kolejka priorytetowa
+## Project 2 - Priority Queue
 
-Implementacja kolejki priorytetowej, za pomocą listy wiązanej w C++.
+Implementation of Priority Queue using linked list in C++. The project includes basic operations on the Priority Queue.
 
-## Projekt 3 - Tablica mieszająca
+## Project 3 - Hash Table
 
-Implementacja Hash table, czyli tablicy mieszającej w języku C++.
+This project involved implementing and comparing the efficiency of different collision resolution techniques for a Hash Table in C++.
 
-Implementacja 3 różnych sposobów:
+The collision resolution techniques implemented were:
 * Separate Chaining
 * Open Addressing
 * Cuckoo Hashing
